@@ -1,0 +1,105 @@
+<template>
+  <div class="mainapp">
+    <div class="title">Vue Theater</div>
+    <MovieList></MovieList>
+    <div class="fixed-control" @click="CheckCartOpen">
+      <p><i class="fa fa-shopping-cart"></i><span>{{cart.length}}</span></p>
+    </div>
+    <MovieInCart></MovieInCart>
+    <div class="buybox" v-if="currentMovie" :style="bgImg(currentMovie.cover)"></div>
+  </div>
+</template>
+
+<script>
+import {mapActions,mapMutations,mapState} from 'vuex'
+import MovieList from './MovieList.vue'
+import MovieInCart from './MovieInCart.vue'
+export default {
+  computed:{
+    ...mapState(['currentMovie','cart'])
+  },
+  components:{
+    MovieList,
+    MovieInCart
+  },
+  methods:{
+    ...mapActions(['getAPI']),
+    ...mapMutations(['CheckCartOpen']),
+    bgImg(url){
+      return {'background-image': 'url('+url+')',
+              'background-size': 'cover',
+              'background-position': 'center center'}
+            },
+  },
+  created(){
+    this.getAPI();
+  },
+  watch: {
+    cart(){
+      TweenMax.from(".fa-shopping-cart",0.3,{
+        scale: 0.5
+      })
+    }
+  }
+}
+</script>
+
+<style>
+  * {
+    vertical-align: middle;
+    outline: none;
+  }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+  }
+
+  .mainapp {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(150deg, #222 0%, #111 100%);
+    display: flex;
+  }
+  .mainapp.isCartOpen .cards {
+    transform: scale(0.8);
+  }
+  .mainapp.isCartOpen .fixed-control {
+    opacity: 0.9;
+  }
+
+  .apptitle {
+    position: fixed;
+    left: 30px;
+    top: 30px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  .buybox {
+    width: 50px;
+    height: 80px;
+    position: fixed;
+    right: 30px;
+    top: 30px;
+    opacity: 0;
+  }
+  .fixed-control {
+    position: fixed;
+    right: 30px;
+    top: 20px;
+    color: white;
+    z-index: 1000;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: 0.5s;
+  }
+  .fixed-control:hover {
+    opacity: 1;
+  }
+  .fixed-control i {
+    margin-right: 10px;
+    font-size: 30px;
+  }  
+</style>
