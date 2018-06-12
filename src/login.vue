@@ -159,6 +159,8 @@ input::-webkit-input-placeholder {
             },
             register(){
                 let checkAcc = this.arr.filter((x)=>{
+                    console.log(x.acc)
+                    console.log(this.acc)
                     return x.acc === this.acc
                 })
                 let acc = this.acc;
@@ -170,7 +172,7 @@ input::-webkit-input-placeholder {
                 } else {
                     this.passwarn = false;
                 }
-                console.log(checkAcc)
+                
                 if(checkAcc.length !== 0){
                     this.warn = true
                 } else {
@@ -226,7 +228,7 @@ input::-webkit-input-placeholder {
         mounted(){
                 let check;
                 let that = this;
-                firebase.database().ref('member').once('value',function(snapshot){
+                firebase.database().ref('member').on('value',function(snapshot){
                     for(check in snapshot.val()){
                         that.arr.push(snapshot.val()[check])
                     }
