@@ -1,5 +1,6 @@
 <template>
   <div class="mainapp">
+    <Login></Login>
     <div class="title">Vue Theater</div>
     <MovieList></MovieList>
     <div class="fixed-control" @click="CheckCartOpen">
@@ -12,6 +13,7 @@
 
 <script>
 import {mapActions,mapMutations,mapState} from 'vuex'
+import Login from './login.vue'
 import MovieList from './MovieList.vue'
 import MovieInCart from './MovieInCart.vue'
 export default {
@@ -20,7 +22,8 @@ export default {
   },
   components:{
     MovieList,
-    MovieInCart
+    MovieInCart,
+    Login,
   },
   methods:{
     ...mapActions(['getAPI']),
@@ -54,6 +57,11 @@ export default {
     height: 100%;
     margin: 0;
     font-family: "Roboto", sans-serif;
+  }
+
+  .title {
+    color:white;
+    opacity: .5;
   }
 
   .mainapp {
