@@ -1,9 +1,9 @@
 <template>
   <div class="mainapp" @wheel.prevent="fadeOutGuide">
     <div v-if="showGuide" class="guide">
-        <i class="fa fa-angle-double-left"></i>
+        <i class="fa fa-arrow-circle-up"></i>
         <span>WHEEL TOP or DOWN to VIEW</span>
-        <i class="fa fa-angle-double-right"></i>
+        <i class="fa fa-arrow-circle-down"></i>
     </div>
     
     <Login></Login>
@@ -130,8 +130,7 @@ export default {
     transform:translateY(-50%);
     top:50%;
     font-size: 50px;
-    color: rgb(93, 85, 85);
-    background:rgba(224, 241, 226, 0.7);
+    color: rgb(100, 169, 115);
     text-align: center;
     z-index: 3000;
     animation: show 2s infinite;
