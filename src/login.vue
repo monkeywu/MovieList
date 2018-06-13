@@ -7,15 +7,15 @@
             <div class="acc">
                 <div>TYPE YOUR ACCOUNT :)</div>
                 <input type="text" placeholder="TYPE YOUR ACCOUNT HERE!" v-model="acc" @click="clear">
-                <div class="warn" v-if="warn">THIS NAME HAS BEEN REGISTERED!</div>
-                <div class="warn" v-if="wrongAcc">WRONG ACCOUNT!</div>
+                <div class="warn animated fadeIn" v-if="warn">THIS NAME HAS BEEN REGISTERED!</div>
+                <div class="warn animated fadeIn" v-if="wrongAcc">WRONG ACCOUNT!</div>
             </div>
 
             <div class="pass">
                 <div>TYPE YOUR PASSWORD :)</div>
                 <input type="password" placeholder="TYPE YOUR PASSWORD HERE!" v-model="pass" @click="clear;">
-                <div class="passwarn" v-if="passwarn">EMPTY PASSWORD!</div>
-                <div class="passwarn" v-if="wrongPass">WRONG PASSWORD</div>
+                <div class="passwarn animated fadeIn" v-if="passwarn">EMPTY PASSWORD!</div>
+                <div class="passwarn animated fadeIn" v-if="wrongPass">WRONG PASSWORD</div>
             </div>
 
             <div class="register" @click="register">
@@ -158,6 +158,10 @@ input::-webkit-input-placeholder {
                 this.showMember = false
             },
             register(){
+                this.warn = false;
+                this.passwarn =false;
+                this.wrongAcc = false;
+                this.wrongPass = false;
                 let checkAcc = this.arr.filter((x)=>{
                     console.log(x.acc)
                     console.log(this.acc)
@@ -182,9 +186,17 @@ input::-webkit-input-placeholder {
                     that.username = acc;
                     that.acc = '';
                     that.pass = '';
+                    that.warn = false;
+                    that.passwarn =false;
+                    that.wrongAcc = false;
+                    that.wrongPass = false;
                 }
             },
             signIn(){
+                this.warn = false;
+                this.passwarn =false;
+                this.wrongAcc = false;
+                this.wrongPass = false;
                 //檢查密碼是否沒輸入
                 if(this.pass === ''){
                     this.passwarn = true;
@@ -222,6 +234,10 @@ input::-webkit-input-placeholder {
                     this.username = checkAccPass[0].acc;
                     this.showMember = false;
                     this.hasLogin = true;
+                    this.warn = false;
+                    this.passwarn =false;
+                    this.wrongAcc = false;
+                    this.wrongPass = false;
                 }
             },
         },
