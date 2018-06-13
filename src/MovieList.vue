@@ -1,5 +1,5 @@
 <template>
-    <div class="movie" @wheel.prevent="wheel($event)">
+    <div class="movie" @wheel.prevent="!isCartOpen&&wheel($event)">
         <div class="cards">
             <Card
             v-for="movie in movies"
@@ -44,7 +44,7 @@
             Card,
         },
         computed:{
-            ...mapState(['movies','cart']),
+            ...mapState(['movies','cart','isCartOpen']),
         },
         methods:{
             bgImg(url){
@@ -53,6 +53,7 @@
                     'background-position': 'center center'}
             },
             wheel(evt){
+                console.log(123)
                 TweenMax.to(".cards",0.8,{
                     left: "+="+evt.deltaY*2+"px"
                 })

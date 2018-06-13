@@ -6,7 +6,7 @@
         <div class="bottom"></div>
       </div>
       <h2>My Movie Cart</h2>
-      <ul>
+      <ul @wheel="a($event)" class="aa">
         <li v-for="(movie,mid) in cart">
           <div class="thumbnail" :style="bgImg(movie.cover)"></div>
           <h3>{{movie.name}}
@@ -32,6 +32,11 @@
             ...mapGetters({totalPrice:'totalPrice'})
         },
         methods:{
+          a(evt){
+                TweenMax.to(".panel",0.8,{
+                    top: "+="+evt.deltaY*1.2+"px"
+                })
+          },
           bgImg(url){
             return {'background-image': 'url('+url+')',
                     'background-size': 'cover',
