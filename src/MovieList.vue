@@ -12,7 +12,9 @@
 <style scoped>
     .movie {
         flex: 1;
-        overflow: hidden;
+        overflow: hidden !important;
+        position: relative;
+        
     }
 
     .cards {
@@ -33,6 +35,11 @@
     import Card from './Card.vue'
     import {mapState} from 'vuex'
     export default {
+        data(){
+            return {
+                check:true
+            }
+        },
         components:{
             Card,
         },
@@ -50,9 +57,6 @@
                     left: "+="+evt.deltaY*2+"px"
                 })
             },
-            check(){
-                return this.isMovieInCart(this.movie)
-            }
         },
     }
 </script>

@@ -1,5 +1,11 @@
 <template>
-  <div class="mainapp">
+  <div class="mainapp" @wheel.prevent="fadeOutGuide">
+    <div v-if="showGuide" class="guide">
+        <i class="fa fa-angle-double-left"></i>
+        <span>WHEEL TOP or DOWN to VIEW</span>
+        <i class="fa fa-angle-double-right"></i>
+    </div>
+    
     <Login></Login>
     <div class="title">Vue Theater</div>
     <MovieList></MovieList>
@@ -18,12 +24,17 @@ import MovieList from './MovieList.vue'
 import MovieInCart from './MovieInCart.vue'
 export default {
   computed:{
-    ...mapState(['currentMovie','cart'])
+    ...mapState(['currentMovie','cart']),
   },
   components:{
     MovieList,
     MovieInCart,
     Login,
+  },
+  data(){
+    return {
+      showGuide : true
+    }
   },
   methods:{
     ...mapActions(['getAPI']),
@@ -33,6 +44,9 @@ export default {
               'background-size': 'cover',
               'background-position': 'center center'}
             },
+    fadeOutGuide(){
+      this.showGuide = false;
+    }
   },
   created(){
     this.getAPI();
@@ -110,4 +124,28 @@ export default {
     margin-right: 10px;
     font-size: 30px;
   }  
+  .guide {
+    width: 100%;
+    position: fixed;
+    transform:translateY(-50%);
+    top:50%;
+    font-size: 50px;
+    color: rgb(93, 85, 85);
+    background:rgba(224, 241, 226, 0.7);
+    text-align: center;
+    z-index: 3000;
+    animation: show 2s infinite;
+  }
+
+  @keyframes show {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 </style>

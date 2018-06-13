@@ -134,11 +134,6 @@
                     'background-size': 'cover',
                     'background-position': 'center center'}
             },
-            wheel(evt){
-                TweenMax.to(".cards",0.8,{
-                    left: "+="+evt.deltaY*2+"px"
-                })
-            },
         },
     }
 </script>

@@ -1,6 +1,10 @@
 <template>
 <div class="control" :class="{show: isCartOpen}">
     <div class="panel animated fadeIn"><i class="fa fa-shopping-cart" style="font-size: 40px;"></i>
+      <div class="close" @click="CheckCartOpen()">
+        close
+        <div class="bottom"></div>
+      </div>
       <h2>My Movie Cart</h2>
       <ul>
         <li v-for="(movie,mid) in cart">
@@ -21,7 +25,7 @@
 </template>
 
 <script>
-    import {mapState,mapGetters} from 'vuex'
+    import {mapState,mapGetters,mapMutations} from 'vuex'
     export default {
         computed:{
             ...mapState(['cart','isCartOpen','moviecart']),
@@ -33,6 +37,7 @@
                     'background-size': 'cover',
                     'background-position': 'center center'}
             },
+          ...mapMutations(['CheckCartOpen']),  
         },
     }
 </script>
@@ -58,6 +63,7 @@
   }
   .control .panel {
     width: 70%;
+    position: relative;
   }
   .control ul {
     padding: 0;
@@ -110,5 +116,34 @@
     background-color: #ef5353;
     color: black;
     opacity: 1;
+  }
+
+  .close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 20px;
+    opacity: .8;
+    transition: opacity 0.5s;
+  }
+
+  .close:hover {
+    opacity: 1;
+  }
+
+  .close:hover .bottom {
+    width:100%;
+    opacity: 1;
+  }
+
+  .bottom {
+    position: absolute;
+    height: 2px;
+    width: 0;
+    background-color:white;
+    opacity: .8;
+    transition: .5s;
   }
 </style>
