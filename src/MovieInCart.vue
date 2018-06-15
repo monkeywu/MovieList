@@ -34,7 +34,7 @@
         methods:{
           Hammerwheel(evt){
                 TweenMax.to(".panel",0.8,{
-                    top: "+="+evt.deltaY+"px"
+                    top: "+="+evt.deltaY*0.5+"px"
                 })
           },
           wheel(evt){
