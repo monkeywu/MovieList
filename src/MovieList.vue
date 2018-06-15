@@ -1,5 +1,5 @@
 <template>
-    <div class="movie" @wheel.prevent="!isCartOpen&&wheel($event)">
+    <div class="movie" @wheel.prevent="wheel($event)"> <!--  -->
         <div class="cards">
             <Card
             v-for="movie in movies"
@@ -12,7 +12,7 @@
 <style scoped>
     .movie {
         flex: 1;
-        overflow: hidden !important;
+        overflow: hidden;
         position: relative;
         
     }
@@ -53,11 +53,22 @@
                     'background-position': 'center center'}
             },
             wheel(evt){
-                console.log(123)
                 TweenMax.to(".cards",0.8,{
                     left: "+="+evt.deltaY*2+"px"
                 })
             },
+            Hammerwheel(evt){
+                TweenMax.to(".cards",0.8,{
+                    left: "+="+evt.deltaX*2+"px"
+                })
+            }
         },
+        mounted(){
+            let swipeActive = new Hammer(document.querySelector(".movie"));
+            let that = this;
+            swipeActive.on("pan", function (e) {
+                    that.Hammerwheel(e)
+            })
+        }
     }
 </script>

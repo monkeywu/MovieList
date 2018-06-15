@@ -120,6 +120,15 @@ input::-webkit-input-placeholder {
     text-align: center;
 }
 
+@media (max-width:600px){
+    .log {
+        left:30%;
+    }
+
+    .member {
+        font-size: 16px;
+    }
+}
 </style>
 
 <script>

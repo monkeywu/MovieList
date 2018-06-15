@@ -6,7 +6,7 @@
         <div class="bottom"></div>
       </div>
       <h2>My Movie Cart</h2>
-      <ul @wheel="a($event)" class="aa">
+      <ul class="aa" @wheel.prevent="wheel($event)">
         <li v-for="(movie,mid) in cart">
           <div class="thumbnail" :style="bgImg(movie.cover)"></div>
           <h3>{{movie.name}}
@@ -32,8 +32,13 @@
             ...mapGetters({totalPrice:'totalPrice'})
         },
         methods:{
-          a(evt){
+          Hammerwheel(evt){
                 TweenMax.to(".panel",0.8,{
+                    top: "+="+evt.deltaY+"px"
+                })
+          },
+          wheel(evt){
+            TweenMax.to(".panel",0.8,{
                     top: "+="+evt.deltaY*1.2+"px"
                 })
           },
@@ -44,6 +49,13 @@
             },
           ...mapMutations(['CheckCartOpen']),  
         },
+        mounted(){
+            let swipeActive = new Hammer(document.querySelector(".aa"));
+            let that = this;
+            swipeActive.on("pan", function (e) {
+                    that.Hammerwheel(e)
+            })
+        }
     }
 </script>
 

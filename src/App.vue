@@ -2,7 +2,7 @@
   <div class="mainapp" @wheel.prevent="fadeOutGuide">
     <div v-if="showGuide" class="guide">
         <i class="fa fa-arrow-circle-up"></i>
-        <span>WHEEL TOP or DOWN to VIEW</span>
+        <span>{{direction}}</span>
         <i class="fa fa-arrow-circle-down"></i>
     </div>
     
@@ -25,6 +25,14 @@ import MovieInCart from './MovieInCart.vue'
 export default {
   computed:{
     ...mapState(['currentMovie','cart']),
+    direction(){
+      console.log(window.innerWidth)
+      if(window.innerWidth > 600){
+        return 'WHEEL TOP or DOWN to VIEW'
+      } else {
+        return 'WHEEL LEFT or RIGHT to VIEW'
+      }
+    }
   },
   components:{
     MovieList,
@@ -57,6 +65,13 @@ export default {
         scale: 0.5
       })
     }
+  },
+  mounted(){
+      let swipeActive = new Hammer(document.querySelector(".mainapp"));
+      let that = this;
+      swipeActive.on("pan", function (e) {
+              that.showGuide = false;
+      })
   }
 }
 </script>
